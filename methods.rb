@@ -56,6 +56,16 @@ module Enumerable
     end
     result
   end
+
+  def my_count
+    result = 0
+    i = 0
+    while i < self.length
+      result += 1 if yield(self[i])
+      i+=1
+    end
+    result
+  end
 end
 
 #testing the methods
@@ -75,3 +85,5 @@ print [1,2,3,4,5,6].my_all? { |n| n>0 }
 print [-1,-2,3,-4,-5].my_any? { |n| n>0 }
 
 print [-1,-2,-3,-4,-5].my_none? { |n| n>0 }
+
+print [1,-2,23,2,-5].my_count { |n| n > 0 }
