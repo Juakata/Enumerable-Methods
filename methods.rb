@@ -25,13 +25,33 @@ module Enumerable
     arr
   end
 
-  def my_all
+  def my_all?
     result = true
     i = 0
     while i < self.length
       if !yield(self[i])
         result=false
       end
+      i+=1
+    end
+    result
+  end
+
+  def my_any?
+    result = false
+    i = 0
+    while i < self.length
+      result = true if yield(self[i])
+      i+=1
+    end
+    result
+  end
+
+  def my_none?
+    result = true
+    i = 0
+    while i < self.length
+      result=false if yield(self[i])
       i+=1
     end
     result
@@ -50,4 +70,8 @@ end
 
 print [1,2,3,4,5,6].my_select { |n| n.odd? }
 
-print [1,2,3,4,5,6].my_all { |n| n>0 }
+print [1,2,3,4,5,6].my_all? { |n| n>0 }
+
+print [-1,-2,3,-4,-5].my_any? { |n| n>0 }
+
+print [-1,-2,-3,-4,-5].my_none? { |n| n>0 }
