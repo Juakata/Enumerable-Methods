@@ -1,9 +1,13 @@
 module Enumerable
   def my_each
-    self[0]
+    i = 0
+    while i < self.length
+      yield(self[i])
+      i+=1
+    end
   end
 end
 
-[1,2,3,4,5].each do |i|
+[1,2,3,4,5].my_each do |i|
   puts i
 end
