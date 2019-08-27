@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Enumerable
   def my_each
     i = 0
@@ -66,6 +67,16 @@ module Enumerable
     end
     result
   end
+
+  def my_map
+    arr = []
+    i = 0
+    while i < self.length
+      arr.push(self[i]) if yield(self[i])
+      i+=1
+    end
+    arr
+  end
 end
 
 #testing the methods
@@ -87,3 +98,5 @@ print [-1,-2,3,-4,-5].my_any? { |n| n>0 }
 print [-1,-2,-3,-4,-5].my_none? { |n| n>0 }
 
 print [1,-2,23,2,-5].my_count { |n| n > 0 }
+
+%w[a b c].map { |string| string.upcase }
