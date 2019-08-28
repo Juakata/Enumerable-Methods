@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Enumerable
-  attr_reader :length
   def my_each
     i = 0
-    while i < self.length
+    length = self.length
+    while i < length
       yield(self[i])
       i += 1
     end
