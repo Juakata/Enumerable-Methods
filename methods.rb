@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Enumerable
-  attr_reader :self
+  attr_reader :length,:self[]
   def my_each
     i = 0
     while i < self.length
