@@ -94,7 +94,7 @@ print [1, 2, 3, 4, 5, 6].my_select do |n|
   n.odd?
 end
 
-print [1, 2, 3, 4, 5, 6].my_all? { |n|
+print [1, 2, 3, 4, 5, 6].my_all? do |n|
   n.positive?
 end
 
