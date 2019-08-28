@@ -21,7 +21,7 @@ module Enumerable
 
   def my_select(&block)
     arr = []
-    self.my_each{|e| arr.push(e) if block.call(e)}
+    self.my_each{ |e| arr.push(e) if block.call(e) }
     arr
   end
 
@@ -131,7 +131,7 @@ print [-1, -2, -3, -4, -5].my_none? { |n| n.positive? }
 
 print [1, -2, 23, 2, -5].my_count { |n| n.positive? }
 
-print %w[a b c].my_map{ |string| string.upcase}
+print %w[a b c].my_map{ |string| string.upcase }
 
 print (1..5).my_inject { |product, n| product * n }
 print [2, 4, 5].my_inject { |product, n| product * n }
