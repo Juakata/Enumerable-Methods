@@ -27,19 +27,19 @@ module Enumerable
 
   def my_all?
     result = true
-    my_each  { result = false unless yield(self[i]) }
+    my_each { result = false unless yield(self[i]) }
     result
   end
 
   def my_any?
     result = false
-    my_each  { result = true if yield(self[i]) }
+    my_each { result = true if yield(self[i]) }
     result
   end
 
   def my_none?
     result = true
-    my_each  { result = false if yield(self[i]) }
+    my_each { result = false if yield(self[i]) }
     result
   end
 
