@@ -98,16 +98,29 @@ print [1, 2, 3, 4, 5, 6].my_all? do |n|
   n.positive?
 end
 
-print [-1, -2, 3, -4, -5].my_any? { |n| n.positive? }
+print [-1, -2, 3, -4, -5].my_any? do |n|
+  n.positive?
+end
 
-print [-1, -2, -3, -4, -5].my_none? { |n| n.positive? }
+print [-1, -2, -3, -4, -5].my_none? do |n|
+  n.positive?
+end
 
-print [1, -2, 23, 2, -5].my_count { |n| n.positive? }
+print [1, -2, 23, 2, -5].my_count do |n|
+  n.positive?
+end
 
-print %w[a b c].my_map { |string| string.upcase }
+print %w[a b c].my_map do |string|
+  string.upcase
+end
 
-print (1..5).my_inject { |product, n| product * n }
-print [2, 4, 5].my_inject { |product, n| product * n }
+print (1..5).my_inject do |product, n|
+  product * n
+end
 
+print [2, 4, 5].my_inject do |product, n|
+  product * n
+end
+  
 proc = proc { |n| n * n }
 print [1, 2, 3, 4, 5].my_map(proc)
