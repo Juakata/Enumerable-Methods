@@ -27,25 +27,25 @@ module Enumerable
 
   def my_all?
     result = true
-    my_each { result = false unless yield(self[i]) }
+    my_each { |e| result = false unless yield(e) }
     result
   end
 
   def my_any?
     result = false
-    my_each { result = true if yield(self[i]) }
+    my_each { |e| result = true if yield(e) }
     result
   end
 
   def my_none?
     result = true
-    my_each { result = false if yield(self[i]) }
+    my_each { |e| result = false if yield(e) }
     result
   end
 
   def my_count
     result = 0
-    my_each { result += 1 if yield(self[i]) }
+    my_each { |e| result += 1 if yield(e) }
     result
   end
 
@@ -53,9 +53,9 @@ module Enumerable
     arr = []
     i = 0
     if proc
-      my_each { arr.push(proc.call(self[i])) }
+      my_each { |e| arr.push(proc.call(e)) }
     else
-      my_each { arr.push(block.call(self[i])) }
+      my_each { |e| arr.push(block.call(e)) }
     end
     arr
   end
@@ -72,9 +72,12 @@ module Enumerable
         i += 1
       end
     else
-      i = 1
+      i=1
       result = self[0]
-      my_each { result = block.call(result, self[i]) }
+      while i < length
+       result = block.call(result, self[i])
+       i+=1
+      end
     end
     result
   end
