@@ -21,51 +21,31 @@ module Enumerable
 
   def my_select(&block)
     arr = []
-    self.my_each{ |e| arr.push(e) if block.call(e) }
+    my_each  { |e| arr.push(e) if block.call(e) }
     arr
   end
 
   def my_all?
     result = true
-    i = 0
-    length = self.length
-    while i < length
-      result = false unless yield(self[i])
-      i += 1
-    end
+    my_each  { result = false unless yield(self[i]) }
     result
   end
 
   def my_any?
     result = false
-    i = 0
-    length = self.length
-    while i < length
-      result = true if yield(self[i])
-      i += 1
-    end
+    my_each  { result = true if yield(self[i]) }
     result
   end
 
   def my_none?
     result = true
-    i = 0
-    length = self.length
-    while i < length
-      result = false if yield(self[i])
-      i += 1
-    end
+    my_each  { result = false if yield(self[i]) }
     result
   end
 
   def my_count
     result = 0
-    i = 0
-    length = self.length
-    while i < length
-      result += 1 if yield(self[i])
-      i += 1
-    end
+    my_each  {  result += 1 if yield(self[i]) }
     result
   end
 
@@ -73,16 +53,9 @@ module Enumerable
     arr = []
     i = 0
     if proc
-      length = self.length
-      while i < length
-        arr.push(proc.call(self[i]))
-        i += 1
-      end
+      my_each  { arr.push(proc.call(self[i])) }
     else
-      while i < self.length
-        arr.push(block.call(self[i]))
-        i += 1
-      end
+      my_each  {  arr.push(block.call(self[i])) }
     end
     arr
   end
@@ -101,11 +74,7 @@ module Enumerable
     else
       i = 1
       result = self[0]
-      length = self.length
-      while i < length
-        result = block.call(result, self[i])
-        i += 1
-      end
+      my_each  {  result = block.call(result, self[i]) }
     end
     result
   end
@@ -136,5 +105,5 @@ print %w[a b c].my_map{ |string| string.upcase }
 print (1..5).my_inject { |product, n| product * n }
 print [2, 4, 5].my_inject { |product, n| product * n }
 
-proc = proc{ |n| n * n }
+proc = proc { |n| n * n }
 print [1, 2, 3, 4, 5].my_map(proc)
