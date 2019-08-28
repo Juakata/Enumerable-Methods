@@ -114,13 +114,12 @@ print %w[a b c].my_map do |string|
   string.upcase
 end
 
-print (1..5).my_inject do |product, n|
+print(1..5).my_inject do |product, n|
   product * n
 end
 
 print [2, 4, 5].my_inject do |product, n|
   product * n
 end
-  
 proc = proc { |n| n * n }
 print [1, 2, 3, 4, 5].my_map(proc)
