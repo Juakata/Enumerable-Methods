@@ -93,11 +93,11 @@ module Enumerable
   end
 
   def my_inject(&block)
-    type = self.instance_of? Range
-    if type
-      last = self.last
-      first = self.first
-      result = self.first
+    type = self
+    if type.instance_of? Range
+      last = type.last
+      first = type.first
+      result = type.first
       i = first
       while i <= last
         result = block.call(result, i) unless i == first
@@ -105,10 +105,10 @@ module Enumerable
       end
     else
       i = 1
-      result = self[0]
-      length = self.length
+      result = type[0]
+      length = type.length
       while i < length
-        result = block.call(result, self[i])
+        result = block.call(result, type[i])
         i += 1
       end
     end
