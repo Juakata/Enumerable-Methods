@@ -68,14 +68,35 @@ module Enumerable
     result
   end
 
-  def my_map
+  def my_map(&block)
     arr = []
     i = 0
     while i < self.length
-      arr.push(self[i]) if yield(self[i])
-      i+=1
+      arr.push(block.call(self[i]))
+      i += 1
     end
     arr
+  end
+
+  def my_inject(&block)
+    if self.instance_of? Range
+      result = self.first
+      i = self.first
+      while i <= self.last
+        if i!=self.first
+          result =+ block.call(result,i)
+        end
+        i+=1
+      end
+    else
+      i = 1
+      result = self[0]
+      while i<self.length
+        result =+ block.call(result,self[i])
+        i+=1
+      end
+    end
+    result
   end
 end
 
@@ -99,4 +120,6 @@ print [-1,-2,-3,-4,-5].my_none? { |n| n>0 }
 
 print [1,-2,23,2,-5].my_count { |n| n > 0 }
 
-%w[a b c].map { |string| string.upcase }
+print %w[a b c].my_map{ |string| string.upcase}
+
+print [2,4,5].my_inject { |product, n| product * n }
