@@ -21,7 +21,7 @@ module Enumerable
 
   def my_select(&block)
     arr = []
-    my_each  { |e| arr.push(e) if block.call(e) }
+    my_each { |e| arr.push(e) if block.call(e) }
     arr
   end
 
