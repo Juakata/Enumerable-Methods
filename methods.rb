@@ -45,7 +45,7 @@ module Enumerable
 
   def my_count
     result = 0
-    my_each  {  result += 1 if yield(self[i]) }
+    my_each { result += 1 if yield(self[i]) }
     result
   end
 
@@ -53,9 +53,9 @@ module Enumerable
     arr = []
     i = 0
     if proc
-      my_each  { arr.push(proc.call(self[i])) }
+      my_each { arr.push(proc.call(self[i])) }
     else
-      my_each  {  arr.push(block.call(self[i])) }
+      my_each { arr.push(block.call(self[i])) }
     end
     arr
   end
@@ -74,7 +74,7 @@ module Enumerable
     else
       i = 1
       result = self[0]
-      my_each  {  result = block.call(result, self[i]) }
+      my_each { result = block.call(result, self[i]) }
     end
     result
   end
