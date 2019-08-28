@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Enumerable
+  attr_reader :length
+  
   def my_each
     i = 0
     while i < self.length
@@ -129,5 +131,5 @@ print %w[a b c].my_map{ |string| string.upcase}
 print (1..5).my_inject { |product, n| product * n }
 print [2, 4, 5].my_inject { |product, n| product * n }
 
-proc = Proc.new { |n| n * n }
-[1, 2, 3, 4, 5].my_map(proc)
+proc = proc{ |n| n * n }
+print [1, 2, 3, 4, 5].my_map(proc)
