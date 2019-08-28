@@ -21,12 +21,7 @@ module Enumerable
 
   def my_select(&block)
     arr = []
-    i = 0
-    length = self.length
-    while i < length
-      arr.push(self[i]) if block.call(self[i])
-      i += 1
-    end
+    self.my_each{|e| arr.push(e) if block.call(e)}
     arr
   end
 
@@ -93,11 +88,11 @@ module Enumerable
   end
 
   def my_inject(&block)
-    type = self
-    if type.instance_of? Range
-      last = type.last
-      first = type.first
-      result = type.first
+    type = self.instance_of? Range
+    if type
+      last = self.last
+      first = self.first
+      result = self.first
       i = first
       while i <= last
         result = block.call(result, i) unless i == first
@@ -105,10 +100,10 @@ module Enumerable
       end
     else
       i = 1
-      result = type[0]
-      length = type.length
+      result = self[0]
+      length = self.length
       while i < length
-        result = block.call(result, type[i])
+        result = block.call(result, self[i])
         i += 1
       end
     end
