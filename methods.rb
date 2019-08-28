@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Enumerable
   def my_each
     i = 0
@@ -30,9 +31,7 @@ module Enumerable
     result = true
     i = 0
     while i < self.length
-      if !yield(self[i])
-        result = false
-      end
+      result = false unless yield(self[i])
       i += 1
     end
     result
@@ -52,7 +51,7 @@ module Enumerable
     result = true
     i = 0
     while i < self.length
-      result=false if yield(self[i])
+      result = false if yield(self[i])
       i += 1
     end
     result
@@ -63,21 +62,20 @@ module Enumerable
     i = 0
     while i < self.length
       result += 1 if yield(self[i])
-      i+=1
+      i += 1
     end
     result
   end
 
-  def my_map(proc=nil,&block)
+  def my_map(proc = nil, &block)
     arr = []
+    i = 0
     if proc
-      i = 0
       while i < self.length
         arr.push(proc.call(self[i]))
         i += 1
       end
     else
-      i = 0
       while i < self.length
         arr.push(block.call(self[i]))
         i += 1
@@ -91,9 +89,7 @@ module Enumerable
       result = self.first
       i = self.first
       while i <= self.last
-        if i != self.first
-          result =+ block.call(result,i)
-        end
+        result =+ block.call(result, i) unless i == self.first
         i += 1
       end
     else
@@ -108,9 +104,9 @@ module Enumerable
   end
 end
 
-#testing the methods
+# testing the methods
 
-[1,2,3,4,5].my_each do |i|
+[1, 2, 3, 4, 5].my_each do |i|
   puts i
 end
 
