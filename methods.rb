@@ -17,11 +17,11 @@ module Enumerable
     end
   end
 
-  def my_select
+  def my_select(&block)
     arr = []
     i = 0
     while i < self.length
-      arr.push(self[i]) if yield(self[i])
+      arr.push(self[i]) if block.call(self[i])
       i += 1
     end
     arr
@@ -89,14 +89,14 @@ module Enumerable
       result = self.first
       i = self.first
       while i <= self.last
-        result =+ block.call(result, i) unless i == self.first
+        result = block.call(result, i) unless i == self.first
         i += 1
       end
     else
       i = 1
       result = self[0]
       while i < self.length
-        result =+ block.call(result, self[i])
+        result = block.call(result, self[i])
         i += 1
       end
     end
@@ -116,13 +116,13 @@ end
 
 print [1, 2, 3, 4, 5, 6].my_select { |n| n.odd? }
 
-print [1, 2, 3, 4, 5, 6].my_all? { |n| n>0 }
+print [1, 2, 3, 4, 5, 6].my_all? { |n| n.positive? }
 
-print [-1, -2, 3, -4, -5].my_any? { |n| n>0 }
+print [-1, -2, 3, -4, -5].my_any? { |n| n.positive? }
 
-print [-1, -2, -3, -4, -5].my_none? { |n| n>0 }
+print [-1, -2, -3, -4, -5].my_none? { |n| n.positive? }
 
-print [1, -2, 23, 2, -5].my_count { |n| n > 0 }
+print [1, -2, 23, 2, -5].my_count { |n| n.positive? }
 
 print %w[a b c].my_map{ |string| string.upcase}
 
