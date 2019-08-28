@@ -12,7 +12,8 @@ module Enumerable
 
   def my_each_with_index
     i = 0
-    while i < self.length
+    length = self.length
+    while i < length
       yield(self[i], i)
       i += 1
     end
@@ -21,7 +22,8 @@ module Enumerable
   def my_select(&block)
     arr = []
     i = 0
-    while i < self.length
+    length = self.length
+    while i < length
       arr.push(self[i]) if block.call(self[i])
       i += 1
     end
@@ -31,7 +33,8 @@ module Enumerable
   def my_all?
     result = true
     i = 0
-    while i < self.length
+    length = self.length
+    while i < length
       result = false unless yield(self[i])
       i += 1
     end
@@ -41,7 +44,8 @@ module Enumerable
   def my_any?
     result = false
     i = 0
-    while i < self.length
+    length = self.length
+    while i < length
       result = true if yield(self[i])
       i += 1
     end
@@ -51,7 +55,8 @@ module Enumerable
   def my_none?
     result = true
     i = 0
-    while i < self.length
+    length = self.length
+    while i < length
       result = false if yield(self[i])
       i += 1
     end
@@ -61,7 +66,8 @@ module Enumerable
   def my_count
     result = 0
     i = 0
-    while i < self.length
+    length = self.length
+    while i < length
       result += 1 if yield(self[i])
       i += 1
     end
@@ -72,7 +78,8 @@ module Enumerable
     arr = []
     i = 0
     if proc
-      while i < self.length
+      length = self.length
+      while i < length
         arr.push(proc.call(self[i]))
         i += 1
       end
@@ -86,17 +93,21 @@ module Enumerable
   end
 
   def my_inject(&block)
-    if self.instance_of? Range
+    type = self.instance_of? Range
+    if type
+      last = self.last
+      first = self.first
       result = self.first
-      i = self.first
-      while i <= self.last
-        result = block.call(result, i) unless i == self.first
+      i = first
+      while i <= last
+        result = block.call(result, i) unless i == first
         i += 1
       end
     else
       i = 1
       result = self[0]
-      while i < self.length
+      length = self.length
+      while i < length
         result = block.call(result, self[i])
         i += 1
       end
