@@ -32,7 +32,4 @@ Layout/ExtraSpacing:
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented
-linters:
-    rubocop:
-        display_cop_names: true
-        fixer: true
+
