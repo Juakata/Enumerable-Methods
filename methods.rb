@@ -25,27 +25,45 @@ module Enumerable
     arr
   end
 
-  def my_all?
+  def my_all?(&block)
     result = true
-    my_each { |e| result = false unless yield(e) }
+    if block
+      my_each { |e| result = false unless yield(e) }
+    else
+      my_each { |e| result = false unless e }
+    end
     result
   end
 
-  def my_any?
+  def my_any?(&block)
     result = false
-    my_each { |e| result = true if yield(e) }
+    if block
+      my_each { |e| result = true if yield(e) }
+    else
+      my_each { |e| result = true if e }
+    end
     result
   end
 
-  def my_none?
+  def my_none?(&block)
     result = true
-    my_each { |e| result = false if yield(e) }
+    if block
+      my_each { |e| result = false if yield(e) }
+    else
+      my_each { |e| result = false if e }
+    end
     result
   end
 
-  def my_count
+  def my_count(val=nil,&block)
     result = 0
-    my_each { |e| result += 1 if yield(e) }
+    if block && !val
+      my_each { |e| result += 1 if yield(e) }
+    elsif !val
+      my_each { |e| result += 1 }
+    else
+      my_each { |e| result += 1 if val == e }
+    end
     result
   end
 
@@ -59,11 +77,11 @@ module Enumerable
     arr
   end
 
-  def my_inject(&block)
+  def my_inject(val=nil,&block)
     if instance_of? Range
       last = self.last
       first = self.first
-      result = self.first
+      result = val
       i = first
       while i <= last
         result = block.call(result, i) unless i == first
@@ -72,6 +90,7 @@ module Enumerable
     else
       i = 1
       result = self[0]
+      result = block.call(result, val) if val
       while i < length
         result = block.call(result, self[i])
         i += 1
