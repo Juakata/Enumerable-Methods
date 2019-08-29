@@ -55,12 +55,12 @@ module Enumerable
     result
   end
 
-  def my_count(val=nil,&block)
+  def my_count(val = nil, &block)
     result = 0
     if block && !val
       my_each { |e| result += 1 if yield(e) }
     elsif !val
-      my_each { |e| result += 1 }
+      my_each { result += 1 }
     else
       my_each { |e| result += 1 if val == e }
     end
@@ -77,7 +77,7 @@ module Enumerable
     arr
   end
 
-  def my_inject(val=nil,&block)
+  def my_inject(val = nil, &block)
     if instance_of? Range
       last = self.last
       first = self.first
