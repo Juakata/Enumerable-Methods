@@ -16,31 +16,31 @@ RSpec.describe Enumerable do
 
   describe '#my_each_with_index' do
     it 'returns all elements with the index in the array' do
-      expect(test_array_1.my_each_with_index { |e, i| i }).to eql(test_array_1)
+      expect(test_array_1.my_each_with_index { |_e, i| i }).to eql(test_array_1)
     end
   end
 
   describe '#my_select' do
     it 'returns an array depending on the condition' do
-        expect(test_array_1.my_select { |e| e.odd? }).to eql(test_array_2)
+      expect(test_array_1.my_select { |e| e%2 != 0 }).to eql(test_array_2)
     end
   end
 
   describe '#my_all' do
     it 'returns true if all the elements meet the condition' do
-        expect(test_array_1.my_all? { |e| e.odd? }).to eql(false)
+        expect(test_array_1.my_all? { |e| e%2 != 0 }).to eql(false)
     end
   end
 
   describe '#my_any' do
     it 'returns true if any elements meet the condition' do
-        expect(test_array_1.my_any? { |e| e.odd? }).to eql(true)
+        expect(test_array_1.my_any? { |e| e%2 != 0 }).to eql(true)
     end
   end
 
   describe '#my_none' do
     it 'returns true if none elements meet the condition' do
-        expect(test_array_1.none? { |e| e.odd? }).to eql(false)
+        expect(test_array_1.none? { |e| e%2 != 0 }).to eql(false)
     end
   end
 
