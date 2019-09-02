@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# spec/calculator_spec.rb
+# spec/method_spec.rb
 
 require './methods.rb'
 
