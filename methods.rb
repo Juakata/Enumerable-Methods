@@ -18,6 +18,7 @@ module Enumerable
       yield(self[i], i)
       i += 1
     end
+    self
   end
 
   def my_select(&block)
