@@ -17,7 +17,7 @@ RSpec.describe Enumerable do
 
   describe '#my_each_with_index' do
     it 'returns all elements with the index in the array' do
-      expect(test_array_1.my_each_with_index { |_e, i| i }).to eql(test_array_1)
+      expect(test_array_1.my_each_with_index { |e| e }).to eql(test_array_1)
     end
   end
 
@@ -47,10 +47,10 @@ RSpec.describe Enumerable do
 
   describe '#my_none' do
     it 'returns true if none elements meet the condition' do
-      expect(test_array_1.none? { |e| e % 3 == 0 }).to eql(false)
+      expect(test_array_1.my_none? { |e| e % 3 == 0 }).to eql(false)
     end
     it 'returns true if none elements meet the condition' do
-      expect(test_array_4.none?).to eql(false)
+      expect(test_array_4.my_none?).to eql(false)
     end
   end
 
