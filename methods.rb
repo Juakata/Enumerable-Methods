@@ -83,7 +83,8 @@ module Enumerable
     if instance_of? Range
       last = self.last
       first = self.first
-      result = val
+      result = first
+      result = block.call(result, val) if val
       i = first
       while i <= last
         result = block.call(result, i) unless i == first
