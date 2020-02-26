@@ -1,5 +1,4 @@
 # Enumerable-Methods
-# Next-Web
 
 > This project is a Enumerable module created by me, with all the methods.
 
